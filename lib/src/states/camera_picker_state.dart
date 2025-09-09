@@ -14,7 +14,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
-import 'package:sensors_plus/sensors_plus.dart';
+// import 'package:sensors_plus/sensors_plus.dart';
 import 'package:wechat_picker_library/wechat_picker_library.dart';
 
 import '../constants/config.dart';
@@ -230,7 +230,7 @@ class CameraPickerState extends State<CameraPicker>
   bool retriedAfterInvalidInitialize = false;
 
   /// Subscribe to the accelerometer.
-  StreamSubscription<AccelerometerEvent>? accelerometerSubscription;
+  // StreamSubscription<AccelerometerEvent>? accelerometerSubscription;
 
   /// The locked capture orientation of the current camera instance.
   DeviceOrientation? lockedCaptureOrientation;
@@ -264,7 +264,7 @@ class CameraPickerState extends State<CameraPicker>
     Singleton.textDelegate = widget.pickerConfig.textDelegate ??
         cameraPickerTextDelegateFromLocale(widget.locale);
     initCameras();
-    initAccelerometerSubscription();
+    // initAccelerometerSubscription();
   }
 
   @override
@@ -283,7 +283,7 @@ class CameraPickerState extends State<CameraPicker>
     exposureFadeOutTimer?.cancel();
     recordDetectTimer?.cancel();
     recordCountdownTimer?.cancel();
-    accelerometerSubscription?.cancel();
+    // accelerometerSubscription?.cancel();
     super.dispose();
   }
 
@@ -562,54 +562,54 @@ class CameraPickerState extends State<CameraPicker>
 
   /// Starts to listen on accelerometer events.
   void initAccelerometerSubscription() {
-    try {
-      final stream = accelerometerEventStream();
-      accelerometerSubscription = stream.listen(handleAccelerometerEvent);
-    } catch (e, s) {
-      realDebugPrint(
-        'The device does not seem to support accelerometer. '
-        'The captured files orientation might be incorrect.',
-      );
-      handleErrorWithHandler(e, s, pickerConfig.onError);
-    }
+    // try {
+    //   final stream = accelerometerEventStream();
+    //   accelerometerSubscription = stream.listen(handleAccelerometerEvent);
+    // } catch (e, s) {
+    //   realDebugPrint(
+    //     'The device does not seem to support accelerometer. '
+    //     'The captured files orientation might be incorrect.',
+    //   );
+    //   handleErrorWithHandler(e, s, pickerConfig.onError);
+    // }
   }
 
   /// Lock capture orientation according to the current status of the device,
   /// which enables the captured file stored the correct orientation.
-  void handleAccelerometerEvent(AccelerometerEvent event) {
-    if (!mounted ||
-        pickerConfig.lockCaptureOrientation != null ||
-        innerController == null ||
-        !controller.value.isInitialized ||
-        controller.value.isPreviewPaused ||
-        controller.value.isRecordingVideo ||
-        controller.value.isTakingPicture) {
-      return;
-    }
-    final x = event.x, y = event.y, z = event.z;
-    final DeviceOrientation? newOrientation;
-    if (x.abs() > y.abs() && x.abs() > z.abs()) {
-      if (x > 0) {
-        newOrientation = DeviceOrientation.landscapeLeft;
-      } else {
-        newOrientation = DeviceOrientation.landscapeRight;
-      }
-    } else if (y.abs() > x.abs() && y.abs() > z.abs()) {
-      if (y > 0) {
-        newOrientation = DeviceOrientation.portraitUp;
-      } else {
-        newOrientation = DeviceOrientation.portraitDown;
-      }
-    } else {
-      newOrientation = null;
-    }
-    // Throttle.
-    if (newOrientation != null && lockedCaptureOrientation != newOrientation) {
-      lockedCaptureOrientation = newOrientation;
-      realDebugPrint('Locking new capture orientation: $newOrientation');
-      controller.lockCaptureOrientation(newOrientation);
-    }
-  }
+  // void handleAccelerometerEvent(AccelerometerEvent event) {
+  //   if (!mounted ||
+  //       pickerConfig.lockCaptureOrientation != null ||
+  //       innerController == null ||
+  //       !controller.value.isInitialized ||
+  //       controller.value.isPreviewPaused ||
+  //       controller.value.isRecordingVideo ||
+  //       controller.value.isTakingPicture) {
+  //     return;
+  //   }
+  //   final x = event.x, y = event.y, z = event.z;
+  //   final DeviceOrientation? newOrientation;
+  //   if (x.abs() > y.abs() && x.abs() > z.abs()) {
+  //     if (x > 0) {
+  //       newOrientation = DeviceOrientation.landscapeLeft;
+  //     } else {
+  //       newOrientation = DeviceOrientation.landscapeRight;
+  //     }
+  //   } else if (y.abs() > x.abs() && y.abs() > z.abs()) {
+  //     if (y > 0) {
+  //       newOrientation = DeviceOrientation.portraitUp;
+  //     } else {
+  //       newOrientation = DeviceOrientation.portraitDown;
+  //     }
+  //   } else {
+  //     newOrientation = null;
+  //   }
+  //   // Throttle.
+  //   if (newOrientation != null && lockedCaptureOrientation != newOrientation) {
+  //     lockedCaptureOrientation = newOrientation;
+  //     realDebugPrint('Locking new capture orientation: $newOrientation');
+  //     controller.lockCaptureOrientation(newOrientation);
+  //   }
+  // }
 
   /// Initializes the flash modes in [validFlashModes] for each
   /// [CameraDescription].
