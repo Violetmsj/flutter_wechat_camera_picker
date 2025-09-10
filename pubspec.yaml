@@ -21,23 +21,44 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  # 纯dart
   wechat_picker_library: ^1.0.2
 
   camera: ^0.10.0
   camera_android: ^0.10.9+6
   camera_platform_interface: ^2.1.5
-
+  # 纯dart
   collection: ">=1.18.0 <2.0.0"
+  # 纯dart
   path: ^1.8.0
   photo_manager: ^3.2.3
+  # 应该是纯dart
   photo_manager_image_provider: ^2.0.0
   # sensors_plus: '>=4.0.0 <7.0.0'
   video_player: ^2.7.0
 
 dev_dependencies:
   flutter_lints: any
-
+dependency_overrides:
+  camera:
+    git:
+      url: "https://gitcode.com/openharmony-tpc/flutter_packages.git"
+      path: "packages/camera/camera"
+      ref: br_camera-v0.11.0+2_ohos
+  camera_platform_interface:
+    git:
+      url: "https://gitcode.com/openharmony-tpc/flutter_packages.git"
+      path: "packages/camera/camera_platform_interface"
+      ref: br_camera-v0.11.0+2_ohos
+  photo_manager:
+    git:
+      url: "https://github.com/fluttercandies/flutter_photo_manager.git"
+      ref: feat-support-harmony
+  video_player:
+    git:
+      url: "https://gitcode.com/openharmony-tpc/flutter_packages.git"
+      path: "packages/video_player/video_player"
+      ref: br_video_player-v2.10.0_ohos
 screenshots:
   - description: "Screenshot 1"
     path: screenshots/README_1.jpg
