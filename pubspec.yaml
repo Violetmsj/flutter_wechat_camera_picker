@@ -31,7 +31,7 @@ dependencies:
   collection: ">=1.18.0 <2.0.0"
   # 纯dart
   path: ^1.8.0
-  photo_manager: ^3.2.3
+  photo_manager: ^3.7.1
   # 应该是纯dart
   photo_manager_image_provider: ^2.0.0
   # sensors_plus: '>=4.0.0 <7.0.0'
