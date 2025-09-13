@@ -53,7 +53,7 @@ dependency_overrides:
   photo_manager:
     git:
       url: "https://github.com/fluttercandies/flutter_photo_manager.git"
-      ref: feat-support-harmony
+      ref: main
   video_player:
     git:
       url: "https://gitcode.com/openharmony-tpc/flutter_packages.git"
